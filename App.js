@@ -1,69 +1,25 @@
-import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { FlatList, View, StyleSheet, Text } from 'react-native';import Card from './components/Card'; 
+import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { FlatList, View, StyleSheet, Text } from "react-native";
+import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+import { SafeAreaView } from "react-native";
+import Perfil from "./src/pages/Perfil";
+import EstouLendo from "./src/pages/EstouLendo";
+import QueroLer from "./src/pages/QueroLer";
 
-const HomeScreen = () => {
-  const products = [
-    {
-      photo: { uri: 'https://picsum.photos/200' },
-      nome: 'Produto 1',
-    },
-    {
-      photo: { uri: 'https://picsum.photos/200' },
-      nome: 'Produto 2',
-    },
-    {
-      photo: { uri: 'https://picsum.photos/200' },
-      nome: 'Produto 3',
-    },
-    {
-      photo: { uri: 'https://picsum.photos/200' },
-      nome: 'Produto 4',
-    },
-    // Adicione mais produtos conforme necessário
-  ];
-
-  return (
-    <FlatList
-      data={products}
-      renderItem={({ item }) => <Card product={item} />}
-      keyExtractor={(item, index) => index.toString()}
-      numColumns={3}
-      contentContainerStyle={styles.list}
-    />
-  );
-};
-
-const ProfileScreen = () => {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Profile Screen</Text>
-    </View>
-  );
-};
-
-const Stack = createNativeStackNavigator();
-
+const Tab = createMaterialTopTabNavigator();
 const App = () => {
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="Home"
-          component={HomeScreen}
-          options={{title: 'Welcome'}}
-        />
-        <Stack.Screen name="Profile" component={ProfileScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <SafeAreaView style={{ flex: 1 }}>
+      <NavigationContainer>
+        <Tab.Navigator>
+          <Tab.Screen name="Perfil" component={Perfil} />
+          <Tab.Screen name="Lendo" component={EstouLendo} />
+          <Tab.Screen name="Desejo Ler" component={QueroLer} />
+        </Tab.Navigator>
+      </NavigationContainer>
+    </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-  list: {
-    justifyContent: 'center',
-  },
-});
 
 export default App;
