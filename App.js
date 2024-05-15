@@ -1,10 +1,10 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import { View, Image } from 'react-native';
+import { View, Image, Text, StyleSheet } from 'react-native'; // Importe Text aqui
 import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import Perfil from './src/pages/Perfil';
+import Lidos from './src/pages/Lidos';
 import EstouLendo from './src/pages/EstouLendo';
 import QueroLer from './src/pages/QueroLer';
 
@@ -32,26 +32,31 @@ const App = () => {
     <SafeAreaProvider>
       <NavigationContainer>
         <SafeArea>
-        
-        <Image
-            source={{ uri: "http://lorempixel.com.br/500/400/?1" }} // Substitua pelo URL da sua imagem
-            style={{ width: '100%', height: 55 }} // Ajuste o tamanho conforme necessário
-          />
-        
-        
+        <View style={styles.userArea}>
+            <Image
+              source={{ uri: "http://lorempixel.com.br/500/400/?1" }}
+              style={styles.userImage}
+            />
+            <Text style={styles.userName}>Nome do Usuário</Text>
+            <Icon name="settings" size={24} />
+          </View>
+
+     
+
           <Tab.Navigator
             tabBarPosition='top'
             screenOptions={{
-              labelStyle: { fontSize: 1 },
-              tabBarStyle: { height: 50 }, // Ajuste a altura conforme necessário // Diminui o tamanho da fonte
+              tabBarStyle: { height: 30 ,
+              backgroundColor: '#FAEBD7'},
+              tabBarShowLabel: false
             }}
           >
             <Tab.Screen 
-              name="Perfil" 
-              component={Perfil} 
+              name="Lidos" 
+              component={Lidos} 
               options={{
                 tabBarIcon: ({ color }) => (
-                  <Icon name="account-outline" color={color} size={15} /> // Aumenta o tamanho do ícone
+                  <Icon name="book-check-outline" color={color} size={15} />
                 ),
               }} 
             />
@@ -60,7 +65,7 @@ const App = () => {
               component={EstouLendo} 
               options={{
                 tabBarIcon: ({ color }) => (
-                  <Icon name="book-outline" color={color} size={25} /> // Aumenta o tamanho do ícone
+                  <Icon name="book-open-page-variant-outline" color={color} size={15} />
                 ),
               }} 
             />
@@ -69,7 +74,7 @@ const App = () => {
               component={QueroLer} 
               options={{
                 tabBarIcon: ({ color }) => (
-                  <Icon name="heart-outline" color={color} size={25} /> // Aumenta o tamanho do ícone
+                  <Icon name="heart-outline" color={color} size={15} />
                 ),
               }} 
             />
@@ -79,5 +84,27 @@ const App = () => {
     </SafeAreaProvider>
   );
 };
+
+const styles = StyleSheet.create({
+  userArea: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: 10,
+  },
+  userImage: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+  },
+  userName: {
+    flex: 1,
+    textAlign: 'center',
+  },
+  divider: {
+    height: 1,
+    backgroundColor: '#000',
+  },
+});
 
 export default App;
