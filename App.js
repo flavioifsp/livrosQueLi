@@ -63,7 +63,7 @@ function Home({navigation}) {
       >
         <Tab.Screen
           name="Lidos"
-          component={Lidos}
+          component={EstouLendo}
           options={{
             tabBarIcon: ({ color }) => (
               <Icon name="book-check-outline" color={color} size={15} />
@@ -72,7 +72,7 @@ function Home({navigation}) {
         />
         <Tab.Screen
           name="Lendo"
-          component={EstouLendo}
+          component={Lidos}
           options={{
             tabBarIcon: ({ color }) => (
               <Icon name="book-open-page-variant-outline" color={color} size={15} />
