@@ -30,7 +30,7 @@ import { CheckBox, View, TextInput, Button, Text, Alert, StyleSheet } from 'reac
 
 
 const FormularioLivro = () => {
-  const paia = usePa,,
+  
 
   const [selected, setSelection] = useState(0);
   const [inputNomeLivro, setinputNomeLivro] = useState('');
