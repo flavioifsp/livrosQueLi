@@ -48,7 +48,7 @@ function Home({navigation}) {
           style={styles.userImage}
         />
         <Text style={styles.userName}>Nome do Usuário</Text>
-        <Button title="Adiconar Livro" onPress={() => navigation.navigate('cadastrar')} color="#3CB371"  ></Button>
+        <Button title="Adiconar Livro" onPress={() => navigation.navigate('cadastrar')} color="#3CB371"></Button>
       </View>
 
       <Tab.Navigator
@@ -103,7 +103,6 @@ const App = () => {
           <Stack.Navigator >
             <Stack.Screen name="Home" component={Home} options={{headerShown : false}} />
             <Stack.Screen name="cadastrar" component={Cadastrar} />
-
           </Stack.Navigator>
 
 

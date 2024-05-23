@@ -1,3 +1,4 @@
+import { useRoute,useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 import React, { useState } from 'react';
 import { CheckBox, View, TextInput, Button, Text, Alert, StyleSheet } from 'react-native';
@@ -29,12 +30,18 @@ import { CheckBox, View, TextInput, Button, Text, Alert, StyleSheet } from 'reac
 
 
 
+
 const FormularioLivro = () => {
-  
+  const navigation = useNavigation();
+  const dados = useRoute();
+
+console.log(dados.params);
+
+
 
   const [selected, setSelection] = useState(0);
-  const [inputNomeLivro, setinputNomeLivro] = useState('');
-  const [inputLinkImagem, setinputLinkImagem] = useState('');
+  const [inputNomeLivro, setinputNomeLivro] = useState(dados.params.item.nome);
+  const [inputLinkImagem, setinputLinkImagem] = useState(dados.params.item.imagem);
 
   async function adicionarLivro() {
     try {
@@ -45,14 +52,30 @@ const FormularioLivro = () => {
         selecionado: selected,
 
       });
-      console.log(response.data);
 
+      navigation.goBack()
 
     } catch (error) {
       console.error(error);
     }
 
   }
+
+  // async function editarLivro() {
+  //   try {
+  //     const response = await axios.put(`http://localhost:3333/livros/${dados.params.item.id}`, {
+  //       nome: inputNomeLivro,
+  //       imagem: inputLinkImagem,
+  //       selecionado: selected,
+  //     });
+  
+  //     navigation.goBack();
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // }
+
+
 
 
 
@@ -105,7 +128,8 @@ const FormularioLivro = () => {
             </View>
           </View>
           <Button title="Adicionar Livro" onPress={adicionarLivro} />
-        </View>
+          {/* <Button title="Editar" color="black" onPress={editarLivro}/> */}
+                  </View>
 
       </View>
     </>
