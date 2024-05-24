@@ -10,6 +10,8 @@ import EstouLendo from './src/pages/EstouLendo';
 import QueroLer from './src/pages/QueroLer';
 import Cadastrar from './src/pages/Cadastrar/Cadastrar';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Filmes from './src/pages/Filmes';
+import CadastrarFilme from './src/pages/Filmes/cadastrarFilmes.js';
 
 
 
@@ -43,11 +45,9 @@ function Home({navigation}) {
 
 
       <View style={styles.userArea}>
-        <Image
-          source={{ uri: "http://lorempixel.com.br/500/400/?1" }}
-          style={styles.userImage}
-        />
-        <Text style={styles.userName}>Nome do Usuário</Text>
+        <Button title="Filmes" onPress={() => navigation.navigate('filmes')} color="blue"></Button>
+     
+        <Text style={styles.userName}>Livros</Text>
         <Button title="Adiconar Livro" onPress={() => navigation.navigate('cadastrar')} color="#3CB371"></Button>
       </View>
 
@@ -103,6 +103,8 @@ const App = () => {
           <Stack.Navigator >
             <Stack.Screen name="Home" component={Home} options={{headerShown : false}} />
             <Stack.Screen name="cadastrar" component={Cadastrar} />
+            <Stack.Screen name="filmes" component={Filmes} />
+            <Stack.Screen name="cadastrarFilme" component={CadastrarFilme} />
           </Stack.Navigator>
 
 

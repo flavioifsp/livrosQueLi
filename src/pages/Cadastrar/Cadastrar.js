@@ -13,7 +13,6 @@ const FormularioLivro = () => {
   const navigation = useNavigation();
   const dados = useRoute();
 
-console.log(dados.params);
 
 
 
