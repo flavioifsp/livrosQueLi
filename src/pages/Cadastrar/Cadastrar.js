@@ -1,32 +1,10 @@
 import { useRoute,useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 import React, { useState } from 'react';
-import { CheckBox, View, TextInput, Button, Text, Alert, StyleSheet } from 'react-native';
+import { CheckBox, View, TextInput, Button, Text, StyleSheet } from 'react-native';
 
 
-// const [livros, setLivros] = useState([]); // Estado para armazenar os livros
 
-
-// const adicionarLivro = async () => {
-//   try {
-
-//     const response = await axios.post('', {
-//       nome: nomeLivro,
-//       imagem: linkImagem,
-//       status: selected,
-//     });
-
-
-//     // Limpa os campos do formulário
-//     setNomeLivro('');
-//     setLinkImagem('');
-//     setSelection(0);
-
-//     Alert.alert('Sucesso', 'Livro adicionado com sucesso!');
-//   } catch (error) {
-//     console.error(error);
-//   }
-// };
 
 
 
@@ -40,8 +18,12 @@ console.log(dados.params);
 
 
   const [selected, setSelection] = useState(0);
-  const [inputNomeLivro, setinputNomeLivro] = useState(dados.params.item.nome);
-  const [inputLinkImagem, setinputLinkImagem] = useState(dados.params.item.imagem);
+const [inputNomeLivro, setinputNomeLivro] = useState(
+  dados.params?.item?.nome || ""
+);
+const [inputLinkImagem, setinputLinkImagem] = useState(
+  dados.params?.item?.imagem || ""
+);
 
   async function adicionarLivro() {
     try {
@@ -61,19 +43,30 @@ console.log(dados.params);
 
   }
 
-  // async function editarLivro() {
-  //   try {
-  //     const response = await axios.put(`http://localhost:3333/livros/${dados.params.item.id}`, {
-  //       nome: inputNomeLivro,
-  //       imagem: inputLinkImagem,
-  //       selecionado: selected,
-  //     });
+  async function editarLivro() {
+    try {
+      const response = await axios.put(`http://localhost:3333/livros/${dados.params.item.id}`, {
+        nome: inputNomeLivro,
+        imagem: inputLinkImagem,
+        selecionado: selected,
+      });
   
-  //     navigation.goBack();
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // }
+      navigation.goBack();
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  
+  async function excluirLivro() {
+    try {
+      const response = await axios.delete(`http://localhost:3333/livros/${dados.params.item.id}`, {
+      });
+  
+      navigation.goBack();
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
 
 
@@ -99,7 +92,7 @@ console.log(dados.params);
           />
 
           <View style={{ flex: 1 }}>
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
               <CheckBox
                 value={selected === 0}
                 onValueChange={() => setSelection(0)}
@@ -107,7 +100,7 @@ console.log(dados.params);
               />
               <Text style={{ marginLeft: 5 }}>Estou Lendo</Text>
             </View>
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
               <CheckBox
                 value={selected === 1}
                 onValueChange={() => setSelection(1)}
@@ -116,21 +109,19 @@ console.log(dados.params);
               <Text style={{ marginLeft: 5 }}>Desejo Ler</Text>
             </View>
 
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
               <CheckBox
                 value={selected === 2}
                 onValueChange={() => setSelection(2)}
                 style={styles.checkbox}
               />
-              <Text style={{ marginLeft: 5 }}>
-                Amei
-              </Text>
+              <Text style={{ marginLeft: 5 }}>Amei</Text>
             </View>
           </View>
           <Button title="Adicionar Livro" onPress={adicionarLivro} />
-          {/* <Button title="Editar" color="black" onPress={editarLivro}/> */}
-                  </View>
-
+          <Button title="Editar" color="black" onPress={editarLivro} />
+          <Button title="Excluir" color="red" onPress={excluirLivro} />
+        </View>
       </View>
     </>
   );
