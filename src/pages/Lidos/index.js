@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
-import { View, Text, FlatList, Image } from "react-native";
+import { View, Text, FlatList, Image, TouchableOpacity} from "react-native";
+import { useNavigation } from '@react-navigation/native';
 
 function Card({ item }) {
+    const navigation = useNavigation();  
     return (
+        <TouchableOpacity onPress={() => navigation.navigate('cadastrar', { item } ) } >
         <View style={{ borderWidth: 1, borderColor: '#000', margin: 10, padding: 10 }}>
             <Text>{item.nome}</Text>
             <Image source={{ uri: item.imagem }} style={{ width: 100, height: 100 }} />
         </View>
+    </TouchableOpacity>
     );
 }
 
