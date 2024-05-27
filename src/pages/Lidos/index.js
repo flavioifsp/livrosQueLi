@@ -18,6 +18,7 @@ function Card({ item }) {
 export default function EstouLendo() {
     const [liste, setListe] = useState([]);
 
+    
     useEffect(() => {
         axios.get('http://localhost:3333/livros')
             .then(response => {

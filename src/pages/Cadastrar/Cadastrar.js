@@ -1,4 +1,4 @@
-import { useRoute,useNavigation } from '@react-navigation/native';
+import { useRoute, useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 import React, { useState } from 'react';
 import { CheckBox, View, TextInput, Button, Text, StyleSheet } from 'react-native';
@@ -15,14 +15,13 @@ const FormularioLivro = () => {
 
 
 
-
-  const [selected, setSelection] = useState(0);
-const [inputNomeLivro, setinputNomeLivro] = useState(
-  dados.params?.item?.nome || ""
-);
-const [inputLinkImagem, setinputLinkImagem] = useState(
-  dados.params?.item?.imagem || ""
-);
+  const [selected, setSelection] = useState(dados.params?.item?.selecionado || 0);
+  const [inputNomeLivro, setinputNomeLivro] = useState(
+    dados.params?.item?.nome || ""
+  );
+  const [inputLinkImagem, setinputLinkImagem] = useState(
+    dados.params?.item?.imagem || ""
+  );
 
   async function adicionarLivro() {
     try {
@@ -49,18 +48,18 @@ const [inputLinkImagem, setinputLinkImagem] = useState(
         imagem: inputLinkImagem,
         selecionado: selected,
       });
-  
+
       navigation.goBack();
     } catch (error) {
       console.error(error);
     }
   }
-  
+
   async function excluirLivro() {
     try {
       const response = await axios.delete(`http://localhost:3333/livros/${dados.params.item.id}`, {
       });
-  
+
       navigation.goBack();
     } catch (error) {
       console.error(error);
